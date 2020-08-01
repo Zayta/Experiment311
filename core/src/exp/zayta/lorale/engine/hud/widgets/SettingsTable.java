@@ -70,9 +70,7 @@ public class SettingsTable extends Table {
         cancelBtn.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                showSettings = false;
-                settingsTable.setVisible(showSettings);
-
+                hideSettingsTable();
                 System.out.println("Cancel was clicked");
             }
         });
@@ -91,6 +89,7 @@ public class SettingsTable extends Table {
         exitButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                hideSettingsTable();
                 game.setMainScreen();
             }
         });
@@ -116,6 +115,10 @@ public class SettingsTable extends Table {
             }
         });
         return settingsButton;
+    }
+    private void hideSettingsTable(){
+        showSettings = false;
+        settingsTable.setVisible(showSettings);
     }
 
 }

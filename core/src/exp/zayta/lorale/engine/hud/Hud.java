@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import exp.zayta.lorale.Game;
@@ -20,6 +21,8 @@ import exp.zayta.lorale.engine.hud.widgets.SettingsTable;
 
 
 public class Hud extends Stage{
+    private static final Logger log = new Logger(Hud.class.getName(), Logger.DEBUG);
+    
 
     BitmapFont font;
     Skin skin;

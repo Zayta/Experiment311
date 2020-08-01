@@ -8,6 +8,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -23,6 +24,8 @@ import exp.zayta.lorale.util.GdxUtils;
 import exp.zayta.lorale.util.ViewportUtils;
 
 public class PlayScreen extends ScreenAdapter {
+    private static final Logger log = new Logger(PlayScreen.class.getName(), Logger.DEBUG);
+
     private Game game;
     private final AssetManager assetManager;
     // == attributes ==
@@ -129,6 +132,7 @@ public class PlayScreen extends ScreenAdapter {
     public void hide() {
 //        dispose();
 //        controller.hide();
+
     }
 
     @Override
