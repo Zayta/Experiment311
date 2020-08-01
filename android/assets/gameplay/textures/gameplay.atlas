@@ -1,0 +1,793 @@
+
+gameplay.png
+size: 1024,256
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+background/parallaxes/day sky
+  rotate: false
+  xy: 2, 2
+  size: 300, 161
+  orig: 300, 161
+  offset: 0, 0
+  index: -1
+background/parallaxes/night
+  rotate: false
+  xy: 304, 13
+  size: 300, 150
+  orig: 300, 150
+  offset: 0, 0
+  index: -1
+background/parallaxes/sunrise parallax
+  rotate: false
+  xy: 606, 13
+  size: 300, 150
+  orig: 300, 150
+  offset: 0, 0
+  index: -1
+
+gameplay2.png
+size: 512,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+brick/brick
+  rotate: false
+  xy: 2, 2
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+brick/brick_lavender
+  rotate: false
+  xy: 68, 2
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+brick/brick_metal_lavendar
+  rotate: false
+  xy: 134, 2
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+brick/brick_metal_yellow
+  rotate: false
+  xy: 200, 2
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+brick/brick_stone
+  rotate: false
+  xy: 266, 2
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+brick/brick_yellow
+  rotate: false
+  xy: 332, 2
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+
+gameplay3.png
+size: 512,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+characters/anon/anon
+  rotate: false
+  xy: 2, 2
+  size: 64, 116
+  orig: 64, 116
+  offset: 0, 0
+  index: 0
+characters/anon/anon
+  rotate: false
+  xy: 2, 2
+  size: 64, 116
+  orig: 64, 116
+  offset: 0, 0
+  index: 10
+characters/anon/anon
+  rotate: false
+  xy: 68, 2
+  size: 64, 116
+  orig: 64, 116
+  offset: 0, 0
+  index: 1
+characters/anon/anon
+  rotate: false
+  xy: 68, 2
+  size: 64, 116
+  orig: 64, 116
+  offset: 0, 0
+  index: 11
+characters/anon/anon
+  rotate: false
+  xy: 134, 6
+  size: 64, 112
+  orig: 64, 112
+  offset: 0, 0
+  index: 2
+characters/anon/anon
+  rotate: false
+  xy: 134, 6
+  size: 64, 112
+  orig: 64, 112
+  offset: 0, 0
+  index: 9
+characters/anon/anon
+  rotate: false
+  xy: 200, 9
+  size: 64, 109
+  orig: 64, 109
+  offset: 0, 0
+  index: 3
+characters/anon/anon
+  rotate: false
+  xy: 266, 9
+  size: 64, 109
+  orig: 64, 109
+  offset: 0, 0
+  index: 6
+characters/anon/anon
+  rotate: false
+  xy: 332, 16
+  size: 64, 102
+  orig: 64, 102
+  offset: 0, 0
+  index: 4
+characters/anon/anon
+  rotate: false
+  xy: 332, 16
+  size: 64, 102
+  orig: 64, 102
+  offset: 0, 0
+  index: 5
+characters/anon/anon
+  rotate: false
+  xy: 398, 16
+  size: 64, 102
+  orig: 64, 102
+  offset: 0, 0
+  index: 7
+characters/anon/anon
+  rotate: false
+  xy: 398, 16
+  size: 64, 102
+  orig: 64, 102
+  offset: 0, 0
+  index: 8
+
+gameplay4.png
+size: 1024,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+characters/joltan/joltan
+  rotate: false
+  xy: 2, 2
+  size: 64, 101
+  orig: 64, 101
+  offset: 0, 0
+  index: 11
+characters/joltan/joltan
+  rotate: false
+  xy: 68, 3
+  size: 64, 100
+  orig: 64, 100
+  offset: 0, 0
+  index: 9
+characters/joltan/joltan
+  rotate: false
+  xy: 134, 3
+  size: 64, 100
+  orig: 64, 100
+  offset: 0, 0
+  index: 10
+characters/joltan/joltan
+  rotate: false
+  xy: 200, 6
+  size: 64, 97
+  orig: 64, 97
+  offset: 0, 0
+  index: 2
+characters/joltan/joltan
+  rotate: false
+  xy: 266, 7
+  size: 64, 96
+  orig: 64, 96
+  offset: 0, 0
+  index: 0
+characters/joltan/joltan
+  rotate: false
+  xy: 332, 7
+  size: 64, 96
+  orig: 64, 96
+  offset: 0, 0
+  index: 1
+characters/joltan/joltan
+  rotate: false
+  xy: 398, 16
+  size: 64, 87
+  orig: 64, 87
+  offset: 0, 0
+  index: 3
+characters/joltan/joltan
+  rotate: false
+  xy: 464, 16
+  size: 64, 87
+  orig: 64, 87
+  offset: 0, 0
+  index: 6
+characters/joltan/joltan
+  rotate: false
+  xy: 530, 17
+  size: 64, 86
+  orig: 64, 86
+  offset: 0, 0
+  index: 4
+characters/joltan/joltan
+  rotate: false
+  xy: 596, 17
+  size: 64, 86
+  orig: 64, 86
+  offset: 0, 0
+  index: 5
+characters/joltan/joltan
+  rotate: false
+  xy: 662, 17
+  size: 64, 86
+  orig: 64, 86
+  offset: 0, 0
+  index: 7
+characters/joltan/joltan
+  rotate: false
+  xy: 728, 17
+  size: 64, 86
+  orig: 64, 86
+  offset: 0, 0
+  index: 8
+
+gameplay5.png
+size: 1024,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+characters/lorale/lorale
+  rotate: false
+  xy: 2, 2
+  size: 64, 106
+  orig: 64, 106
+  offset: 0, 0
+  index: 3
+characters/lorale/lorale
+  rotate: false
+  xy: 68, 2
+  size: 64, 106
+  orig: 64, 106
+  offset: 0, 0
+  index: 4
+characters/lorale/lorale
+  rotate: false
+  xy: 134, 2
+  size: 64, 106
+  orig: 64, 106
+  offset: 0, 0
+  index: 5
+characters/lorale/lorale
+  rotate: false
+  xy: 200, 2
+  size: 64, 106
+  orig: 64, 106
+  offset: 0, 0
+  index: 6
+characters/lorale/lorale
+  rotate: false
+  xy: 266, 2
+  size: 64, 106
+  orig: 64, 106
+  offset: 0, 0
+  index: 7
+characters/lorale/lorale
+  rotate: false
+  xy: 332, 2
+  size: 64, 106
+  orig: 64, 106
+  offset: 0, 0
+  index: 8
+characters/lorale/lorale
+  rotate: false
+  xy: 398, 3
+  size: 64, 105
+  orig: 64, 105
+  offset: 0, 0
+  index: 11
+characters/lorale/lorale
+  rotate: false
+  xy: 464, 4
+  size: 64, 104
+  orig: 64, 104
+  offset: 0, 0
+  index: 1
+characters/lorale/lorale
+  rotate: false
+  xy: 530, 4
+  size: 64, 104
+  orig: 64, 104
+  offset: 0, 0
+  index: 2
+characters/lorale/lorale
+  rotate: false
+  xy: 596, 4
+  size: 64, 104
+  orig: 64, 104
+  offset: 0, 0
+  index: 10
+characters/lorale/lorale
+  rotate: false
+  xy: 662, 5
+  size: 64, 103
+  orig: 64, 103
+  offset: 0, 0
+  index: 0
+characters/lorale/lorale
+  rotate: false
+  xy: 728, 5
+  size: 64, 103
+  orig: 64, 103
+  offset: 0, 0
+  index: 9
+
+gameplay6.png
+size: 1024,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+characters/tenyu/tenyu
+  rotate: false
+  xy: 2, 2
+  size: 64, 101
+  orig: 64, 101
+  offset: 0, 0
+  index: 0
+characters/tenyu/tenyu
+  rotate: false
+  xy: 68, 2
+  size: 64, 101
+  orig: 64, 101
+  offset: 0, 0
+  index: 1
+characters/tenyu/tenyu
+  rotate: false
+  xy: 134, 2
+  size: 64, 101
+  orig: 64, 101
+  offset: 0, 0
+  index: 2
+characters/tenyu/tenyu
+  rotate: false
+  xy: 200, 4
+  size: 64, 99
+  orig: 64, 99
+  offset: 0, 0
+  index: 9
+characters/tenyu/tenyu
+  rotate: false
+  xy: 266, 4
+  size: 64, 99
+  orig: 64, 99
+  offset: 0, 0
+  index: 10
+characters/tenyu/tenyu
+  rotate: false
+  xy: 332, 4
+  size: 64, 99
+  orig: 64, 99
+  offset: 0, 0
+  index: 11
+characters/tenyu/tenyu
+  rotate: false
+  xy: 398, 10
+  size: 64, 93
+  orig: 64, 93
+  offset: 0, 0
+  index: 4
+characters/tenyu/tenyu
+  rotate: false
+  xy: 464, 10
+  size: 64, 93
+  orig: 64, 93
+  offset: 0, 0
+  index: 5
+characters/tenyu/tenyu
+  rotate: false
+  xy: 530, 10
+  size: 64, 93
+  orig: 64, 93
+  offset: 0, 0
+  index: 7
+characters/tenyu/tenyu
+  rotate: false
+  xy: 530, 10
+  size: 64, 93
+  orig: 64, 93
+  offset: 0, 0
+  index: 8
+characters/tenyu/tenyu
+  rotate: false
+  xy: 596, 11
+  size: 64, 92
+  orig: 64, 92
+  offset: 0, 0
+  index: 3
+characters/tenyu/tenyu
+  rotate: false
+  xy: 662, 11
+  size: 64, 92
+  orig: 64, 92
+  offset: 0, 0
+  index: 6
+
+gameplay7.png
+size: 256,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+dialogue/dialogue-box
+  rotate: false
+  xy: 2, 2
+  size: 167, 66
+  orig: 167, 66
+  offset: 0, 0
+  index: -1
+
+gameplay8.png
+size: 1024,64
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+emotes/emote__
+  rotate: false
+  xy: 2, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emotes/emote_alert
+  rotate: false
+  xy: 36, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emotes/emote_anger
+  rotate: false
+  xy: 70, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emotes/emote_bars
+  rotate: false
+  xy: 104, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emotes/emote_cash
+  rotate: false
+  xy: 138, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emotes/emote_circle
+  rotate: false
+  xy: 172, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emotes/emote_cloud
+  rotate: false
+  xy: 206, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emotes/emote_cross
+  rotate: false
+  xy: 240, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emotes/emote_dots1
+  rotate: false
+  xy: 274, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emotes/emote_dots2
+  rotate: false
+  xy: 308, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emotes/emote_dots3
+  rotate: false
+  xy: 342, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emotes/emote_drop
+  rotate: false
+  xy: 376, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emotes/emote_drops
+  rotate: false
+  xy: 410, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emotes/emote_exclamation
+  rotate: false
+  xy: 444, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emotes/emote_exclamations
+  rotate: false
+  xy: 478, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emotes/emote_faceAngry
+  rotate: false
+  xy: 512, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emotes/emote_faceHappy
+  rotate: false
+  xy: 546, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emotes/emote_faceSad
+  rotate: false
+  xy: 580, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emotes/emote_heart
+  rotate: false
+  xy: 614, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emotes/emote_heartBroken
+  rotate: false
+  xy: 648, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emotes/emote_hearts
+  rotate: false
+  xy: 682, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emotes/emote_idea
+  rotate: false
+  xy: 716, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emotes/emote_laugh
+  rotate: false
+  xy: 750, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emotes/emote_music
+  rotate: false
+  xy: 784, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emotes/emote_question
+  rotate: false
+  xy: 818, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emotes/emote_sleep
+  rotate: false
+  xy: 852, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emotes/emote_sleeps
+  rotate: false
+  xy: 886, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emotes/emote_star
+  rotate: false
+  xy: 920, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emotes/emote_stars
+  rotate: false
+  xy: 954, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+emotes/emote_swirl
+  rotate: false
+  xy: 988, 2
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+
+gameplay9.png
+size: 512,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+overlay/four
+  rotate: false
+  xy: 2, 2
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+overlay/one
+  rotate: false
+  xy: 68, 2
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+overlay/three
+  rotate: false
+  xy: 134, 2
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+overlay/two
+  rotate: false
+  xy: 200, 2
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+
+gameplay10.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+scenes/intro/intro
+  rotate: false
+  xy: 2, 549
+  size: 900, 1200
+  orig: 900, 1200
+  offset: 0, 0
+  index: 5
+scenes/intro/intro
+  rotate: false
+  xy: 904, 549
+  size: 900, 1200
+  orig: 900, 1200
+  offset: 0, 0
+  index: 6
+scenes/intro/intro
+  rotate: false
+  xy: 2, 2
+  size: 360, 545
+  orig: 360, 545
+  offset: 0, 0
+  index: 0
+scenes/intro/intro
+  rotate: false
+  xy: 364, 2
+  size: 360, 545
+  orig: 360, 545
+  offset: 0, 0
+  index: 1
+scenes/intro/intro
+  rotate: false
+  xy: 726, 2
+  size: 360, 545
+  orig: 360, 545
+  offset: 0, 0
+  index: 2
+scenes/intro/intro
+  rotate: false
+  xy: 1088, 2
+  size: 360, 545
+  orig: 360, 545
+  offset: 0, 0
+  index: 3
+scenes/intro/intro
+  rotate: false
+  xy: 1450, 2
+  size: 360, 545
+  orig: 360, 545
+  offset: 0, 0
+  index: 4
+
+gameplay11.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+scenes/intro/intro
+  rotate: false
+  xy: 2, 2
+  size: 900, 1200
+  orig: 900, 1200
+  offset: 0, 0
+  index: 7
+scenes/intro/intro
+  rotate: false
+  xy: 904, 2
+  size: 900, 1200
+  orig: 900, 1200
+  offset: 0, 0
+  index: 8
+
+gameplay12.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+scenes/intro/intro
+  rotate: false
+  xy: 2, 2
+  size: 900, 1200
+  orig: 900, 1200
+  offset: 0, 0
+  index: 9
+scenes/intro/intro
+  rotate: false
+  xy: 904, 2
+  size: 900, 1200
+  orig: 900, 1200
+  offset: 0, 0
+  index: 10
