@@ -53,7 +53,7 @@ public class RenderSystem extends EntitySystem {
         for(Entity entity:renderQueue) {
             Position position = Mappers.POSITION.get(entity);
             TextureComponent texture = Mappers.TEXTURE.get(entity);
-            batch.draw(texture.getRegion(), position.getX()+texture.getRenderOffset(), position.getY(), texture.getRenderWidth(), texture.getRenderHeight());
+            batch.draw(texture.getRegion(), position.getX(), position.getY(), position.getWidth(), position.getHeight());
 
 
 //            batch.draw(entityTemplate.getTextureRegion(), entityTemplate.getDrawX()+renderOffset, entityTemplate.getDrawY(),width,height);

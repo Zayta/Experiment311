@@ -13,7 +13,8 @@ import exp.zayta.lorale.engine.movement.movement_components.Position;
 public class CameraUpdateSystem extends IteratingSystem {
     private static final Family family = Family.all(PlayerTag.class, Position.class).get();
     private Viewport viewport; private float mapWidth,mapHeight;
-    public CameraUpdateSystem(int priority, Viewport viewport, float mapWidth, float mapHeight) {
+    //todo fix
+    public CameraUpdateSystem(int priority, Viewport viewport) {
         super(family,priority);
         this.viewport = viewport;
         this.mapWidth = mapWidth;
@@ -31,13 +32,13 @@ public class CameraUpdateSystem extends IteratingSystem {
 //        boolean cameraShouldMove = mapWidth>viewport.getWorldWidth()||mapHeight>viewport.getWorldHeight();
 //      uncomment below for camera to only move when player is out of screeh
         Vector3 camPos= new Vector3(viewport.getCamera().position).sub(viewport.getWorldWidth()/2,viewport.getWorldHeight()/2,0);
-        boolean cameraShouldMove = x>=camPos.x+viewport.getWorldWidth()
-                ||x<=camPos.x
-                ||y>=camPos.y+viewport.getWorldHeight()
-                ||y<=camPos.y;
-        if(cameraShouldMove){
+//        boolean cameraShouldMove = x>=camPos.x+viewport.getWorldWidth()
+//                ||x<=camPos.x
+//                ||y>=camPos.y+viewport.getWorldHeight()
+//                ||y<=camPos.y;
+//        if(cameraShouldMove){
             Vector3 newCameraPosition = new Vector3(x,y,0);
             viewport.getCamera().position.set(newCameraPosition);
-        }
+//        }
     }
 }

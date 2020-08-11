@@ -4,6 +4,8 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -42,14 +44,13 @@ public class LoadingScreen extends ScreenAdapter {
     // == public methods ==
     @Override
     public void show() {
-//        //////log.debug("show");
         orthographicCamera = new OrthographicCamera();
         viewport = new FitViewport(GameConfig.HUD_WIDTH, GameConfig.HUD_HEIGHT, orthographicCamera);
         renderer = new ShapeRenderer();
 
 
         loadAssets();
-
+        loadTiledMap();
         assetManager.finishLoading();
     }
 
@@ -62,6 +63,11 @@ public class LoadingScreen extends ScreenAdapter {
         assetManager.load(AssetDescriptors.GAMEPLAY);
         assetManager.load(AssetDescriptors.UI_SKIN);
 
+
+    }
+    private void loadTiledMap(){
+        assetManager.setLoader(TiledMap.class,new TmxMapLoader());
+        assetManager.load(AssetDescriptors.MAP_LAB);
 
     }
 

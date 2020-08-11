@@ -1,15 +1,18 @@
 package exp.zayta.lorale.engine.movement.movement_components;
 
 import com.badlogic.ashley.core.Component;
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Pool;
 
+import exp.zayta.lorale.GameConfig;
+
 public class Position implements Component, Pool.Poolable {
     // == attributes ==
     private Vector2 position;
-    private float width = 1;
-    private float height = 1;
+    private float width = GameConfig.ENTITY_WIDTH;
+    private float height = GameConfig.ENTITY_HEIGHT;
 
     private Rectangle bounds;
 

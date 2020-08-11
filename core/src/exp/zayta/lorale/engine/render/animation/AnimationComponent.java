@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Array;
 
 import java.util.ArrayList;
 
+import exp.zayta.lorale.GameConfig;
 import exp.zayta.lorale.engine.movement.Direction;
 
 public class AnimationComponent implements Component {
@@ -16,6 +17,7 @@ public class AnimationComponent implements Component {
     // Constant rows and columns of the sprite sheet
     private final int FRAME_COLS = 3, FRAME_ROWS = 4;
 //    private Direction animationDirection;
+    private final float frameDuration = GameConfig.MOVING_SPEED;
 
     //    private Animation<TextureRegion> currentAnimation; private float currentTime=0;
     private ArrayList<Animation<TextureRegion>> animations;
@@ -35,7 +37,7 @@ public class AnimationComponent implements Component {
             int index = i*FRAME_COLS;
             Array<TextureRegion> frames = new Array<TextureRegion>(new TextureRegion[]{
                     textureRegions.get(index),textureRegions.get(index+1),textureRegions.get(index+2)});
-            animations.add(i,new Animation<TextureRegion>(0.2f,frames, Animation.PlayMode.LOOP));
+            animations.add(i,new Animation<TextureRegion>(frameDuration,frames, Animation.PlayMode.LOOP));
         }
         //this is based on my spritesheet.
         upAnimation = animations.get(3);

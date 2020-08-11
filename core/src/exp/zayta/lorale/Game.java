@@ -25,7 +25,7 @@ public class Game extends com.badlogic.gdx.Game {
 
 	@Override
 	public void create() {
-		Gdx.app.setLogLevel(Application.LOG_NONE);
+		Gdx.app.setLogLevel(Application.LOG_DEBUG);
 		userData = UserData.getInstance();
 
 		assetManager = new AssetManager();
