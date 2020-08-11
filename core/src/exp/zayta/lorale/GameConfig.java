@@ -80,6 +80,22 @@ public class GameConfig {
 
      }
 
+    /**
+     * Multiples input by tile size to scale it to tiled coordinates
+     * @param unit - unit coordinate
+     * @return
+     */
+     public static float unitToTiledCoord(float unit){
+        return unit*TILE_SIZE;
+     }
 
+    /**
+     * Divides input by tile size to scale it to unit coordinates
+     * @param tiledCoord - tiled coordinate
+     * @return
+     */
+     public static float tiledToUnitCoord(float tiledCoord){
+        return tiledCoord/TILE_SIZE;
+     }
 
 }

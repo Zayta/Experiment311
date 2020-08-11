@@ -18,6 +18,7 @@ import exp.zayta.lorale.GameConfig;
 import exp.zayta.lorale.engine.movement.Direction;
 
 public class TiledMapCollisionDetector {
+
     private static final Logger log = new Logger(TiledMapCollisionDetector.class.getName(), Logger.DEBUG);
 
     private TiledMapTileLayer collisionLayer;

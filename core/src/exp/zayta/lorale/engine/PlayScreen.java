@@ -8,8 +8,12 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -23,6 +27,7 @@ import exp.zayta.lorale.debug.DebugCameraSystem;
 import exp.zayta.lorale.engine.entities.Characters;
 import exp.zayta.lorale.engine.hud.Hud;
 import exp.zayta.lorale.engine.hud.HudSystem;
+import exp.zayta.lorale.engine.map.MapMaker;
 import exp.zayta.lorale.engine.map.tiled_map.TiledMapCollisionSystem;
 import exp.zayta.lorale.engine.map.tiled_map.TiledMapRenderSystem;
 import exp.zayta.lorale.engine.movement.Direction;
@@ -31,6 +36,7 @@ import exp.zayta.lorale.engine.movement.PositionsComparatorSystem;
 import exp.zayta.lorale.engine.movement.position_tracker.DebugPositionTrackerSystem;
 import exp.zayta.lorale.engine.movement.position_tracker.PositionTracker;
 import exp.zayta.lorale.engine.movement.position_tracker.PositionTrackerSystem;
+import exp.zayta.lorale.engine.movement.world_wrap.WorldWrapPauseSystem;
 import exp.zayta.lorale.engine.render.CameraUpdateSystem;
 import exp.zayta.lorale.engine.render.RenderSystem;
 import exp.zayta.lorale.engine.render.animation.AnimationSystem;
@@ -54,11 +60,15 @@ public class PlayScreen extends ScreenAdapter {
     private PlayerController playerController;
     //story
 //    private DialogueFileParser dialogueFileParser;
+
     //game elements
     private PooledEngine engine;
     private EntityFactory entityFactory;
+    public static final String PLAYER_SPAWN = "player_spawn";
+    //map
+    private MapMaker mapMaker;
+    //position
     private PositionTracker positionTracker;
-    private String collisionLayer = "Collision";
 
     public PlayScreen(Game game){
         //gameplay data
@@ -75,6 +85,7 @@ public class PlayScreen extends ScreenAdapter {
         TextureAtlas textureAtlas = assetManager.get(AssetDescriptors.GAMEPLAY);
 
         this.entityFactory = new EntityFactory(engine,textureAtlas);
+        this.mapMaker = new MapMaker(assetManager);
 
         positionTracker = new PositionTracker(Math.max(GameConfig.VIRTUAL_WIDTH,GameConfig.VIRTUAL_HEIGHT));
 
@@ -94,16 +105,27 @@ public class PlayScreen extends ScreenAdapter {
 //        hud.setShowSettings(false);
 //        engine.update(0);
         engine.removeAllEntities();//need this call!
-//        positionTracker.init(Math.max(Math.max(map.getMapWidth(),map.getMapHeight()),
-//                Math.max(GameConfig.VIRTUAL_WIDTH, GameConfig.VIRTUAL_HEIGHT)));
-        positionTracker.init(Math.max(GameConfig.VIRTUAL_WIDTH, GameConfig.VIRTUAL_HEIGHT));
+
+        mapMaker.init(MapMaker.MapName.memLab);
+        entityFactory.init(mapMaker.getMapWidth(),mapMaker.getMapHeight());
+        positionTracker.init(Math.max(Math.max((int)mapMaker.getMapWidth(),(int)mapMaker.getMapHeight()),
+                Math.max(GameConfig.VIRTUAL_WIDTH, GameConfig.VIRTUAL_HEIGHT)));
 
         addEntities();//entitiies sb added b4 systems
 
         addSystems();
     }
     private void addEntities(){
-        entityFactory.addPlayer(Characters.CharacterName.LORALE,0,0);
+        MapLayer mapLayer = mapMaker.getPositionLayer();
+        MapObjects objects = mapLayer.getObjects();
+        for (RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)) {
+
+            if(rectangleObject.getName().equals(PLAYER_SPAWN)){
+                Rectangle rectangle = rectangleObject.getRectangle();
+
+                entityFactory.addPlayer(Characters.CharacterName.LORALE,GameConfig.tiledToUnitCoord(rectangle.x),GameConfig.tiledToUnitCoord(rectangle.y));
+            }
+        }
     }
 
     /**
@@ -115,6 +137,7 @@ public class PlayScreen extends ScreenAdapter {
         engine.addSystem(new PositionsComparatorSystem(2));
         engine.addSystem(new PositionTrackerSystem(10,positionTracker));//updates the tracker
         engine.addSystem(new MovementSystem(70));//moves entity to target position n set movement to none. should be last
+        engine.addSystem(new WorldWrapPauseSystem(30));
 
         engine.addSystem(new CameraUpdateSystem(10,viewport));
 
@@ -127,12 +150,10 @@ public class PlayScreen extends ScreenAdapter {
         addDebugSystems();
     }
     private void addTiledMapSystems(){
-
-        TiledMap tiledMap = assetManager.get(AssetDescriptors.MAP_LAB);
-        engine.addSystem(new TiledMapCollisionSystem(30,(TiledMapTileLayer) tiledMap.getLayers().get(collisionLayer)));
+        engine.addSystem(new TiledMapCollisionSystem(30,(TiledMapTileLayer) mapMaker.getCollisionLayer()));
 //        engine.addSystem(new MapBlockPauseSystem(31,(TiledMapTileLayer) tiledMap.getLayers().get(1)));
 
-        engine.addSystem(new TiledMapRenderSystem(100,tiledMap,viewport));
+        engine.addSystem(new TiledMapRenderSystem(100,mapMaker.getTiledMap(),viewport));
     }
     private void addAnimationSystems(){
         engine.addSystem(new AnimationSystem(15));
