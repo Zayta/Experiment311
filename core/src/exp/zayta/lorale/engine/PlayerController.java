@@ -7,13 +7,10 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
-import javax.xml.stream.events.Characters;
-
 import exp.zayta.lorale.common.Mappers;
-import exp.zayta.lorale.engine.PlayScreen;
 import exp.zayta.lorale.engine.entities.EntityType;
 import exp.zayta.lorale.engine.entities.tags.PlayerTag;
-import exp.zayta.lorale.engine.game_systems.hand_hold.FollowerTag;
+import exp.zayta.lorale.engine.game_systems.character.follower.FollowerTag;
 import exp.zayta.lorale.engine.movement.Direction;
 import exp.zayta.lorale.engine.movement.movement_components.MovementComponent;
 import exp.zayta.lorale.engine.movement.position_tracker.PositionTracker;

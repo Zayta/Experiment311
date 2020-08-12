@@ -24,7 +24,7 @@ public class GameConfig {
     //entity config
     public static final float MOVING_SPEED = 0.09f;
     public static final float ENTITY_HEIGHT = 0.8f;
-    public static final float ENTITY_WIDTH = 0.7f*ENTITY_HEIGHT;
+    public static final float ENTITY_WIDTH = 1f;//0.7f*ENTITY_HEIGHT;
 
 
     //hud

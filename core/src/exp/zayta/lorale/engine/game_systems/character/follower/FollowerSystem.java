@@ -1,4 +1,4 @@
-package exp.zayta.lorale.engine.game_systems.hand_hold;
+package exp.zayta.lorale.engine.game_systems.character.follower;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;

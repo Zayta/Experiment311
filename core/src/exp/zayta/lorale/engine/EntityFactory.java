@@ -63,8 +63,30 @@ public class EntityFactory {
         engine.addEntity(player);
     }
 
-    public void addNighter(){
+    public void addNighter(Characters.CharacterName characterName, float x, float y){
+        Entity entity = engine.createEntity();
 
+        CharacterTag characterTag = engine.createComponent(CharacterTag.class);
+        characterTag.setCharacterName(characterName);
+        entity.add(characterTag);
+
+        addMovementComponents(entity,EntityType.CHARACTER, x,y);
+        Mappers.MOVEMENT.get(entity).setDirection(Direction.down);
+
+
+
+        TextureComponent textureComponent = engine.createComponent(TextureComponent.class);
+
+        textureComponent.init(characters.getTexture(characterName).get(0));
+        entity.add(textureComponent);
+
+
+        AnimationComponent animationComponent = engine.createComponent(AnimationComponent.class);
+        animationComponent.init(characters.getTexture(characterName));
+        entity.add(animationComponent);
+
+        ////System.out.println("Player is at position "+Mappers.POSITION.get(entity).getPosition().toString());
+        engine.addEntity(entity);
     }
 
 

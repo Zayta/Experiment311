@@ -17,24 +17,26 @@ import exp.zayta.lorale.Game;
 import exp.zayta.lorale.GameConfig;
 import exp.zayta.lorale.engine.movement.Direction;
 
+/**
+ * Collision detector for tiled map cells and tiles - detects when a character collided with an object
+ * from tiled map
+ */
 public class TiledMapCollisionDetector {
 
     private static final Logger log = new Logger(TiledMapCollisionDetector.class.getName(), Logger.DEBUG);
 
     private TiledMapTileLayer collisionLayer;
-    private float increment,scale= GameConfig.TILE_SIZE;
+    private float increment;
     public TiledMapCollisionDetector(TiledMapTileLayer collisionLayer){
         this.collisionLayer = collisionLayer;
-        log.debug("Collision layer is "+collisionLayer);
-        log.debug("Collisition layer tile height is "+collisionLayer.getTileHeight()+"< width is "+collisionLayer.getTileWidth());
     }
     
 
     public TiledMapTile getCollidedTile(float xf, float yf, float widthf, float heightf, Direction direction){
-                float x = xf* scale,
-                y=yf*scale,
-                width=widthf*scale,
-                height=heightf*scale;//scale all coordinates to tile coordinates
+                float x = xf* GameConfig.TILE_SIZE,
+                y=yf*GameConfig.TILE_SIZE,
+                width=widthf*GameConfig.TILE_SIZE,
+                height=heightf*GameConfig.TILE_SIZE;//scale all coordinates to tile coordinates
         increment = collisionLayer.getTileHeight();
         increment = height < increment ? height / 2 : increment / 2;
 
@@ -131,11 +133,11 @@ public class TiledMapCollisionDetector {
 
         for (RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)) {
             Rectangle rectangle = rectangleObject.getRectangle();
-            log.debug("Object rectangle is "+rectangle);
-            log.debug("Player pos is "+xi+","+yi);
+//            log.debug("Object rectangle is "+rectangle);
+//            log.debug("Player pos is "+xi+","+yi);
             if (rectangle.contains(xi,yi)){
                 // collision happened
-                log.debug("Collision w obj when walking dir ");
+//                log.debug("Collision w obj when walking dir ");
                 return tiledMapTile;
             }
         }

@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Logger;
@@ -25,6 +24,7 @@ import exp.zayta.lorale.debug.DebugPlayerBoundsSystem;
 import exp.zayta.lorale.assets.AssetDescriptors;
 import exp.zayta.lorale.debug.DebugCameraSystem;
 import exp.zayta.lorale.engine.entities.Characters;
+import exp.zayta.lorale.engine.game_systems.character.CharacterBlockSystem;
 import exp.zayta.lorale.engine.hud.Hud;
 import exp.zayta.lorale.engine.hud.HudSystem;
 import exp.zayta.lorale.engine.map.MapMaker;
@@ -108,8 +108,9 @@ public class PlayScreen extends ScreenAdapter {
 
         mapMaker.init(MapMaker.MapName.memLab);
         entityFactory.init(mapMaker.getMapWidth(),mapMaker.getMapHeight());
-        positionTracker.init(Math.max(Math.max((int)mapMaker.getMapWidth(),(int)mapMaker.getMapHeight()),
-                Math.max(GameConfig.VIRTUAL_WIDTH, GameConfig.VIRTUAL_HEIGHT)));
+//        positionTracker.init(Math.max(Math.max((int)Math.ceil(mapMaker.getMapWidth()),(int)Math.ceil(mapMaker.getMapHeight())),
+//                Math.max(GameConfig.VIRTUAL_WIDTH, GameConfig.VIRTUAL_HEIGHT)));
+        positionTracker.init((int)mapMaker.getMapWidth());
 
         addEntities();//entitiies sb added b4 systems
 
@@ -117,14 +118,25 @@ public class PlayScreen extends ScreenAdapter {
     }
     private void addEntities(){
         MapLayer mapLayer = mapMaker.getPositionLayer();
-        MapObjects objects = mapLayer.getObjects();
-        for (RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)) {
+        if(mapLayer!=null) {
+            MapObjects objects = mapLayer.getObjects();
+            for (RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)) {
+                if(rectangleObject.isVisible()) {//if point is visible in the tiled map, entity should be added
 
-            if(rectangleObject.getName().equals(PLAYER_SPAWN)){
-                Rectangle rectangle = rectangleObject.getRectangle();
-
-                entityFactory.addPlayer(Characters.CharacterName.LORALE,GameConfig.tiledToUnitCoord(rectangle.x),GameConfig.tiledToUnitCoord(rectangle.y));
+                    Rectangle rectangle = rectangleObject.getRectangle();
+                    if (PLAYER_SPAWN.equals(rectangleObject.getName())) {
+                        entityFactory.addPlayer(Characters.CharacterName.LORALE, GameConfig.tiledToUnitCoord(rectangle.x), GameConfig.tiledToUnitCoord(rectangle.y));
+                    }
+                    for (Characters.CharacterName characterName : Characters.CharacterName.values()) {
+                        if (characterName.toString().equalsIgnoreCase(rectangleObject.getName())) {
+                            entityFactory.addNighter(characterName, GameConfig.tiledToUnitCoord(rectangle.x), GameConfig.tiledToUnitCoord(rectangle.y));
+                        }
+                    }
+                }
             }
+        }
+        else {
+            entityFactory.addPlayer(Characters.CharacterName.LORALE,0,0);
         }
     }
 
@@ -138,6 +150,11 @@ public class PlayScreen extends ScreenAdapter {
         engine.addSystem(new PositionTrackerSystem(10,positionTracker));//updates the tracker
         engine.addSystem(new MovementSystem(70));//moves entity to target position n set movement to none. should be last
         engine.addSystem(new WorldWrapPauseSystem(30));
+
+
+
+        engine.addSystem(new CharacterBlockSystem(40,positionTracker));
+
 
         engine.addSystem(new CameraUpdateSystem(10,viewport));
 

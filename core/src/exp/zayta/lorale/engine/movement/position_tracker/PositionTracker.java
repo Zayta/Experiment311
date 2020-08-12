@@ -13,7 +13,7 @@ import exp.zayta.lorale.util.BiMap;
 public class PositionTracker{
     private int mapDimension;
     private BiMap<Integer, Entity> globalTracker;
-
+    public static int n;
     private BiMap<EntityType,BiMap<Integer, Entity>> entityTracker;
 
 
@@ -32,10 +32,11 @@ public class PositionTracker{
         clear();
         this.mapDimension = mapDimension;
     }
-    private int generateKey(float x, float y)
+    public int generateKey(float x, float y)
     {
-        int n =(int) Math.ceil(mapDimension/ GameConfig.ENTITY_WIDTH);
-        return Math.round(x)*n+Math.round(y);
+        n =(int)( (mapDimension+1)/GameConfig.ENTITY_WIDTH);
+        int i = (int)(y/GameConfig.ENTITY_HEIGHT),j = (int)(x/GameConfig.ENTITY_WIDTH)/*, n= mapWidth/maxObjWidth*/;
+        return i*n+j;
     }
     public void removeEntity(Entity e){
         globalTracker.removeKey(e);
@@ -62,6 +63,9 @@ public class PositionTracker{
 
     public Entity getEntityAtPos(float x, float y){
         return globalTracker.get(generateKey(x,y));
+    }
+    public Entity getEntity(int key){
+        return globalTracker.get(key);
     }
     public ArrayList<Entity> getEntitiesAtPos(float x, float y){
         ArrayList<Entity> ret = new ArrayList<Entity>();

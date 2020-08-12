@@ -6,7 +6,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 
 import exp.zayta.lorale.common.Mappers;
 import exp.zayta.lorale.engine.entities.tags.PlayerTag;
-import exp.zayta.lorale.engine.game_systems.hand_hold.FollowerTag;
+import exp.zayta.lorale.engine.game_systems.character.follower.FollowerTag;
 import exp.zayta.lorale.engine.movement.movement_components.MovementComponent;
 
 import static exp.zayta.lorale.engine.movement.PositionsComparator.positionsComparator;

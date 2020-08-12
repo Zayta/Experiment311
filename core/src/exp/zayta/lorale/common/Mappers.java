@@ -1,10 +1,9 @@
 package exp.zayta.lorale.common;
 
 import com.badlogic.ashley.core.ComponentMapper;
-import com.badlogic.gdx.physics.box2d.World;
 
 import exp.zayta.lorale.engine.entities.tags.PlayerTag;
-import exp.zayta.lorale.engine.game_systems.hand_hold.FollowerTag;
+import exp.zayta.lorale.engine.game_systems.character.follower.FollowerTag;
 import exp.zayta.lorale.engine.movement.movement_components.MovementComponent;
 import exp.zayta.lorale.engine.movement.movement_components.Position;
 import exp.zayta.lorale.engine.movement.position_tracker.PositionTrackerComponent;
