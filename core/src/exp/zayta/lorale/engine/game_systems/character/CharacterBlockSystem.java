@@ -149,7 +149,7 @@ public class CharacterBlockSystem extends SortedIteratingSystem {
         Vector2 targetPos = Mappers.MOVEMENT.get(entity).getTargetPosition();
         BoundsComponent boundsComponent = Mappers.BOUNDS.get(entity);
         Rectangle rectangle = new Rectangle(targetPos.x,targetPos.y,boundsComponent.getWidth(),boundsComponent.getHeight());
-       boolean ret =  Intersector.overlaps(rectangle,Mappers.BOUNDS.get(collidedE).getBounds());
+       boolean ret =  overlaps(rectangle,Mappers.BOUNDS.get(collidedE).getBounds());
        log.debug("chckcollision returns "+ret);
        return ret;
     }

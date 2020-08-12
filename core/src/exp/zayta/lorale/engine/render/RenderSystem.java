@@ -9,8 +9,13 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import java.util.Arrays;
+
 import exp.zayta.lorale.common.Mappers;
 import exp.zayta.lorale.engine.movement.movement_components.BoundsComponent;
+
+import static exp.zayta.lorale.engine.movement.PositionsComparator.positionsComparator;
+import static exp.zayta.lorale.engine.render.TopDownComparator.topDownComparator;
 
 
 public class RenderSystem extends EntitySystem {
@@ -37,7 +42,10 @@ public class RenderSystem extends EntitySystem {
     public void update(float deltaTime) {
 
         ImmutableArray<Entity> entities = getEngine().getEntitiesFor(FAMILY);
+
+
         renderQueue.addAll(entities.toArray());
+        renderQueue.sort(topDownComparator);
         viewport.apply();
         batch.setProjectionMatrix(viewport.getCamera().combined);
         batch.begin();

@@ -178,7 +178,7 @@ public class PlayScreen extends ScreenAdapter {
     }
 
     private void addDebugSystems(){
-        engine.addSystem(new DebugPlayerBoundsSystem(200,viewport));
+//        engine.addSystem(new DebugPlayerBoundsSystem(200,viewport));
         engine.addSystem(new DebugCameraSystem(200,camera, GameConfig.VIRTUAL_CENTER_X, GameConfig.VIRTUAL_CENTER_Y));
         engine.addSystem(new DebugPositionTrackerSystem(100,positionTracker,viewport,batch));
     }
