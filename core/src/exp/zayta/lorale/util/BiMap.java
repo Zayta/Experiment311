@@ -36,7 +36,7 @@ public class BiMap<K,V> {
         inversedMap.clear();
     }
 
-    public V remove(Object key)
+    public V remove(K key)
     {
         V ret = map.remove(key);
         inversedMap.remove(ret);
@@ -51,7 +51,7 @@ public class BiMap<K,V> {
         return map.containsValue(value);
     }
     //Note map and inversedMap need to match up when removing
-    public K removeKey(Object value)
+    public K removeKey(V value)
     {
         K ret = inversedMap.remove(value);
         map.remove(ret);

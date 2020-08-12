@@ -16,7 +16,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import exp.zayta.lorale.GameConfig;
 import exp.zayta.lorale.common.Mappers;
-import exp.zayta.lorale.engine.movement.movement_components.Position;
+import exp.zayta.lorale.engine.movement.movement_components.BoundsComponent;
 
 public class DebugPositionTrackerSystem extends EntitySystem {
     private static final Logger log = new Logger(DebugPositionTrackerSystem.class.getName(), Logger.DEBUG);
@@ -31,7 +31,7 @@ public class DebugPositionTrackerSystem extends EntitySystem {
     private static final Family FAMILY = Family.all(
 //            PlayerTag.class,
             PositionTrackerComponent.class,
-            Position.class
+            BoundsComponent.class
     ).get();
 
 
@@ -71,13 +71,13 @@ public class DebugPositionTrackerSystem extends EntitySystem {
     }
 
     protected void drawEntity(Entity entity) {
-        Position position = Mappers.POSITION.get(entity);
+        BoundsComponent boundsComponent = Mappers.BOUNDS.get(entity);
 
-        layout.setText(font,/*"Position: ("+position.getX()+","+position.getY()+")\n"+
-                "Position Raw Key: "+PositionTracker.generateKey(position.getX(),position.getY())+"\n"+
+        layout.setText(font,/*"BoundsComponent: ("+boundsComponent.getX()+","+boundsComponent.getY()+")\n"+
+                "BoundsComponent Raw Key: "+PositionTracker.generateKey(boundsComponent.getX(),boundsComponent.getY())+"\n"+
                 "Bounds Raw Key: "+PositionTracker.generateKey(bounds.getX(),bounds.getY())+"\n"+*/
                 "p:" + positionTracker.getKeyForEntity(entity));
-        font.draw(batch, layout, position.getX(), position.getY() + position.getHeight() + layout.height+0.1f);//0.1f is offset from bottom
+        font.draw(batch, layout, boundsComponent.getX(), boundsComponent.getY() + boundsComponent.getHeight() + layout.height+0.1f);//0.1f is offset from bottom
     }
 
     @Override

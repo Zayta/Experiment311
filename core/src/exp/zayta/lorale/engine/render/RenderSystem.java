@@ -10,13 +10,13 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import exp.zayta.lorale.common.Mappers;
-import exp.zayta.lorale.engine.movement.movement_components.Position;
+import exp.zayta.lorale.engine.movement.movement_components.BoundsComponent;
 
 
 public class RenderSystem extends EntitySystem {
     public static final Family FAMILY = Family.all(
             TextureComponent.class,
-            Position.class
+            BoundsComponent.class
     ).get();
 
 
@@ -51,7 +51,7 @@ public class RenderSystem extends EntitySystem {
     }
     private void drawEntities(){
         for(Entity entity:renderQueue) {
-            Position position = Mappers.POSITION.get(entity);
+            BoundsComponent position = Mappers.BOUNDS.get(entity);
             TextureComponent texture = Mappers.TEXTURE.get(entity);
             batch.draw(texture.getRegion(), position.getX(), position.getY(), position.getWidth(), position.getHeight());
 

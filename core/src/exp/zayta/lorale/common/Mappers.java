@@ -2,8 +2,11 @@ package exp.zayta.lorale.common;
 
 import com.badlogic.ashley.core.ComponentMapper;
 
+import org.omg.CORBA.Bounds;
+
 import exp.zayta.lorale.engine.entities.tags.PlayerTag;
 import exp.zayta.lorale.engine.game_systems.character.follower.FollowerTag;
+import exp.zayta.lorale.engine.movement.movement_components.BoundsComponent;
 import exp.zayta.lorale.engine.movement.movement_components.MovementComponent;
 import exp.zayta.lorale.engine.movement.movement_components.Position;
 import exp.zayta.lorale.engine.movement.position_tracker.PositionTrackerComponent;
@@ -18,6 +21,8 @@ public class Mappers {
     public static final ComponentMapper<MovementComponent> MOVEMENT = ComponentMapper.getFor(MovementComponent.class);
     public static final ComponentMapper<AnimationComponent> ANIMATION = ComponentMapper.getFor(AnimationComponent.class);
     public static final ComponentMapper<Position> POSITION = ComponentMapper.getFor(Position.class);
+
+    public static final ComponentMapper<BoundsComponent> BOUNDS = ComponentMapper.getFor(BoundsComponent.class);
     public static final ComponentMapper<TextureComponent> TEXTURE = ComponentMapper.getFor(TextureComponent.class);
 
     //other movements

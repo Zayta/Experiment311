@@ -15,6 +15,7 @@ import exp.zayta.lorale.common.Mappers;
 import exp.zayta.lorale.engine.entities.tags.CharacterTag;
 import exp.zayta.lorale.engine.map.tiled_map.tile_collision.TiledMapCollisionDetector;
 import exp.zayta.lorale.engine.movement.movement_components.MovementComponent;
+import exp.zayta.lorale.engine.movement.movement_components.BoundsComponent;
 import exp.zayta.lorale.engine.movement.movement_components.Position;
 
 public class TiledMapCollisionSystem extends IteratingSystem {
@@ -22,6 +23,8 @@ public class TiledMapCollisionSystem extends IteratingSystem {
 
     private static final Family family = Family.all(
             MovementComponent.class,
+            Position.class,
+            BoundsComponent.class,
             CharacterTag.class).get();
     private TiledMapCollisionDetector collisionDetector;
     public TiledMapCollisionSystem(int priority, TiledMapTileLayer tiledMapCollisionLayer) {
@@ -33,19 +36,19 @@ public class TiledMapCollisionSystem extends IteratingSystem {
     protected void processEntity(Entity entity, float deltaTime) {
         MovementComponent movementComponent = Mappers.MOVEMENT.get(entity);
         Vector2 targetPosition = movementComponent.getTargetPosition();
-        Position position = Mappers.POSITION.get(entity);
+        BoundsComponent bounds = Mappers.BOUNDS.get(entity);
 
             TiledMapTile collidedTile = collisionDetector.getCollidedTile(targetPosition.x,targetPosition.y,
-                    position.getWidth(),position.getHeight(),movementComponent.getDirection());
+                    bounds.getWidth(),bounds.getHeight(),movementComponent.getDirection());
             if(collidedTile!=null){
                 //handle collision event
                 MapProperties tileProperties = collidedTile.getProperties();
                 if(tileProperties.containsKey("hi")){ //if tile has certain property, do certain thing
 
                 }
-                log.debug("Collision with collision layer happened: "+tileProperties.getKeys());
+//                log.debug("Collision with collision layer happened: "+tileProperties.getKeys());
                 //block entity from moving
-                targetPosition.set(position.getPosition()); //stop entity from moving
+                targetPosition.set(Mappers.POSITION.get(entity).getPosition()); //stop entity from moving
 
             }
 

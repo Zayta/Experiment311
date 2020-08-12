@@ -15,24 +15,23 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import exp.zayta.lorale.GameConfig;
 import exp.zayta.lorale.common.Mappers;
-import exp.zayta.lorale.engine.movement.movement_components.Position;
+import exp.zayta.lorale.engine.movement.movement_components.BoundsComponent;
 import exp.zayta.lorale.engine.movement.position_tracker.DebugPositionTrackerSystem;
 import exp.zayta.lorale.engine.movement.position_tracker.PositionTracker;
-import exp.zayta.lorale.engine.movement.position_tracker.PositionTrackerComponent;
 
 public class DebugPlayerBoundsSystem extends EntitySystem {
-    private static final Logger log = new Logger(DebugPositionTrackerSystem.class.getName(), Logger.DEBUG);
+    private static final Logger log = new Logger(DebugPlayerBoundsSystem.class.getName(), Logger.DEBUG);
     private final Viewport viewport;
     private final BitmapFont font;
     private ShapeRenderer shapeRenderer;
     private final GlyphLayout layout = new GlyphLayout();
 
     private Array<Entity> renderQueue = new Array<Entity>();
-    private PositionTracker positionTracker;
+    private PositionTracker boundsTracker;
     private static final Family FAMILY = Family.all(
 //            PlayerTag.class,
 //            PositionTrackerComponent.class,
-            Position.class
+            BoundsComponent.class
     ).get();
 
 
@@ -41,7 +40,7 @@ public class DebugPlayerBoundsSystem extends EntitySystem {
         super(priority);
         this.viewport = viewport;
         this.shapeRenderer = new ShapeRenderer();
-        this.positionTracker = positionTracker;
+        this.boundsTracker = boundsTracker;
 
         /**Customize Font**/
         this.font = new BitmapFont();
@@ -71,8 +70,8 @@ public class DebugPlayerBoundsSystem extends EntitySystem {
 
     }
     private void drawEntity(Entity entity){
-        Position position = Mappers.POSITION.get(entity);
+        BoundsComponent bounds = Mappers.BOUNDS.get(entity);
 
-        shapeRenderer.rect(position.getX(),position.getY(),position.getWidth(),position.getHeight());
+        shapeRenderer.rect(bounds.getX(),bounds.getY(),bounds.getWidth(),bounds.getHeight());
     }
 }

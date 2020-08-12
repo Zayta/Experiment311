@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import exp.zayta.lorale.GameConfig;
 import exp.zayta.lorale.engine.entities.EntityType;
@@ -11,110 +12,82 @@ import exp.zayta.lorale.util.BiMap;
 
 
 public class PositionTracker{
-    private int mapDimension;
-    private BiMap<Integer, Entity> globalTracker;
+    private int mapWidth;
+    //key: integer position area, value: list of entities in that position area
+    private BiMap<Integer, List<Entity>> globalTracker;
+    private BiMap<Entity,Integer> entityTracker;//key: entity, value: its position area
     public static int n;
-    private BiMap<EntityType,BiMap<Integer, Entity>> entityTracker;
 
 
-    public PositionTracker(int mapDimension){
-        globalTracker = new BiMap<Integer, Entity>();
-        entityTracker = new BiMap<EntityType, BiMap<Integer, Entity>>();
-        EntityType types[] = EntityType.values();
-        ////System.out.println("Contents of the enum are: ");
-        //Iterating enum using the for loop
-        for(EntityType type: types) {
-            entityTracker.put(type,new BiMap<Integer, Entity>());
-        }
-        this.mapDimension = mapDimension;
+    public PositionTracker(int mapWidth){
+        globalTracker = new BiMap<Integer, List<Entity>>();
+        entityTracker = new BiMap<>();
+        this.mapWidth = mapWidth;
     }
-    public void init(int mapDimension){
+    public void init(int mapWidth){
         clear();
-        this.mapDimension = mapDimension;
+        this.mapWidth = mapWidth;
     }
     public int generateKey(float x, float y)
     {
-        n =(int)( (mapDimension+1)/GameConfig.ENTITY_WIDTH);
+        n =(int)( (mapWidth+1)/GameConfig.ENTITY_WIDTH);
         int i = (int)(y/GameConfig.ENTITY_HEIGHT),j = (int)(x/GameConfig.ENTITY_WIDTH)/*, n= mapWidth/maxObjWidth*/;
         return i*n+j;
     }
-    public void removeEntity(Entity e){
-        globalTracker.removeKey(e);
-        for(EntityType entityType:EntityType.values()){
-            entityTracker.get(entityType).removeKey(e);
-        }
-    }
 
+
+    public void updateEntityTracker(Entity entity, float x, float y){
+        entityTracker.put(entity,generateKey(x,y));
+    }
     public void updateGlobalTracker(Entity entity, float x, float y) {
-
-        globalTracker.removeKey(entity);
+        removeEntity(entity);
         int key=generateKey(x,y);
-
-        globalTracker.put(key,entity);
+        insertEntity(key,entity);
     }
-    public void updateEntityTracker(Entity entity, EntityType entityType, float x, float y) {
-
-        entityTracker.get(entityType).removeKey(entity);
-        int key=generateKey(x,y);
-
-        entityTracker.get(entityType).put(key,entity);
-    }
-
-
-    public Entity getEntityAtPos(float x, float y){
-        return globalTracker.get(generateKey(x,y));
-    }
-    public Entity getEntity(int key){
-        return globalTracker.get(key);
-    }
-    public ArrayList<Entity> getEntitiesAtPos(float x, float y){
-        ArrayList<Entity> ret = new ArrayList<Entity>();
-        for(EntityType entityType: EntityType.values()) {
-            Entity entity = entityTracker.get(entityType).get(generateKey(x, y));
-            if(entity!=null)
-                ret.add(entity);
-        }
-//        ////System.out.println("Entities at position "+x+","+y+" are "+ Arrays.toString(ret.toArray()));
-        return ret;
-    }
-    public ArrayList<Entity> getSolidEntitiesAtPos(float x, float y){
-        ArrayList<Entity> ret = new ArrayList<Entity>();
-        for(EntityType entityType: EntityType.values()) {
-            if(entityType!=EntityType.GOAL&&entityType!=EntityType.HOLE) {
-                Entity entity = entityTracker.get(entityType).get(generateKey(x, y));
-                if (entity != null)
-                    ret.add(entity);
+    private void removeEntity(Entity entity){
+        int key = getKeyForEntity(entity);
+        List<Entity> entities = globalTracker.get(key);
+        if(entities!=null) {
+            entities.remove(entity);//remove entity from list
+            if (entities.isEmpty()) {
+                globalTracker.remove(key);
             }
         }
-//        ////System.out.println("Entities at position "+x+","+y+" are "+ Arrays.toString(ret.toArray()));
-        return ret;
+
+    }
+    private void insertEntity(int key,Entity entity){
+
+        List<Entity> entities = globalTracker.get(key);
+        if(entities==null){
+            globalTracker.put(key,new ArrayList<Entity>());
+            entities = globalTracker.get(key);
+        }
+        entities.add(entity);
+
+    }
+    public List<Entity> getEntitiesAtPos(float x, float y){
+
+        return globalTracker.get(generateKey(x,y));
+    }
+    public List<Entity> getEntity(int key){
+        return globalTracker.get(key);
     }
 
-    public Entity getEntityAtPos(EntityType entityType,float x, float y){
-        return entityTracker.get(entityType).get(generateKey(x,y));
-    }
+    public int getKeyForEntity(Entity entity){
 
-    public boolean isGoalPos(float x, float y){
-        return entityTracker.get(EntityType.GOAL).get(generateKey(x,y))!=null;
-    }
-
-    public int getKeyForEntity(Entity entityTemplate){
-        Integer key = globalTracker.getKey(entityTemplate);
+        Integer key = entityTracker.get(entity);
         if(key==null)
             return -1;
         return key.intValue();
     }
 
-    public Entity getEntityAtPos(Vector2 pos){
+    public List<Entity> getEntitiesAtPos(Vector2 pos){
         return globalTracker.get(generateKey(pos.x,pos.y));
     }
 
     private void clear(){
         globalTracker.clear();
-        for(EntityType entityType: entityTracker.keySet()){
-            entityTracker.get(entityType).clear();
-        }
-
+        entityTracker.clear();
     }
     public void reset(){
         clear();

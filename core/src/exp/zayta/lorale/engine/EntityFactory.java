@@ -13,6 +13,7 @@ import exp.zayta.lorale.engine.entities.EntityType;
 import exp.zayta.lorale.engine.entities.tags.CharacterTag;
 import exp.zayta.lorale.engine.entities.tags.PlayerTag;
 import exp.zayta.lorale.engine.movement.Direction;
+import exp.zayta.lorale.engine.movement.movement_components.BoundsComponent;
 import exp.zayta.lorale.engine.movement.movement_components.MovementComponent;
 import exp.zayta.lorale.engine.movement.movement_components.Position;
 import exp.zayta.lorale.engine.movement.position_tracker.PositionTrackerComponent;
@@ -100,6 +101,10 @@ public class EntityFactory {
         PositionTrackerComponent positionTrackerComponent = engine.createComponent(PositionTrackerComponent.class);
         positionTrackerComponent.init(entityType);
         entity.add(positionTrackerComponent);
+
+        BoundsComponent boundsComponent = engine.createComponent(BoundsComponent.class);
+        boundsComponent.init(x,y);
+        entity.add(boundsComponent);
 
         MovementComponent movementComponent = engine.createComponent(MovementComponent.class);
         movementComponent.init(new Vector2(position.getX(),position.getY()));

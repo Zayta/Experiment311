@@ -5,10 +5,12 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.SortedIteratingSystem;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Logger;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import exp.zayta.lorale.GameConfig;
 import exp.zayta.lorale.common.Mappers;
@@ -16,7 +18,7 @@ import exp.zayta.lorale.engine.entities.EntityType;
 import exp.zayta.lorale.engine.entities.tags.CharacterTag;
 import exp.zayta.lorale.engine.movement.Direction;
 import exp.zayta.lorale.engine.movement.movement_components.MovementComponent;
-import exp.zayta.lorale.engine.movement.movement_components.Position;
+import exp.zayta.lorale.engine.movement.movement_components.BoundsComponent;
 import exp.zayta.lorale.engine.movement.position_tracker.PositionTracker;
 
 import static exp.zayta.lorale.engine.movement.PositionsComparator.positionsComparator;
@@ -29,7 +31,7 @@ public class CharacterBlockSystem extends SortedIteratingSystem {
     private PositionTracker positionTracker;
     private static final Family family = Family.all(
             MovementComponent.class,
-            Position.class,
+            BoundsComponent.class,
             CharacterTag.class).get();
     private float increment = Math.max(GameConfig.ENTITY_HEIGHT, GameConfig.ENTITY_WIDTH);
     public CharacterBlockSystem(int priority,PositionTracker positionTracker) {
@@ -44,16 +46,16 @@ public class CharacterBlockSystem extends SortedIteratingSystem {
         MovementComponent movementComponent = Mappers.MOVEMENT.get(entity);
         Vector2 targetPosition = movementComponent.getTargetPosition();
         Direction direction = movementComponent.getDirection();
-        Position position = Mappers.POSITION.get(entity);
-        increment=Math.min(position.getWidth()/2,position.getHeight()/2);
+        BoundsComponent bounds = Mappers.BOUNDS.get(entity);
+        increment=Math.min(bounds.getWidth()/2,bounds.getHeight()/2);
 
-//        Entity collidedCharacter = detectCollidedCharacter(targetPosition,movementComponent.getDirection(),position);
+//        Entity collidedCharacter = detectCollidedCharacter(targetPosition,movementComponent.getDirection(),bounds);
 //        if(collidedCharacter!=null&&collidedCharacter!=entity){//if there's a collided character that is not the entity itself
 //                movementComponent.setTargetPosition(Mappers.POSITION.get(entity).getPosition());
 //        }
 
         int[] keys = new int[6];
-//        log.debug("Position tracker n is "+positionTracker.n);
+//        log.debug("BoundsComponent tracker n is "+positionTracker.n);
         int key = positionTracker.generateKey(targetPosition.x,targetPosition.y);
         int keyAbove = key + PositionTracker.n;
         int keyBelow = key - PositionTracker.n;
@@ -62,9 +64,6 @@ public class CharacterBlockSystem extends SortedIteratingSystem {
 //            };
         switch (direction) {
             case none:
-                Entity block = positionTracker.getEntity(key);
-                if (block != null&&block!=entity&&checkCollisionBetween(entity,block))
-                    blockEntity(entity);
                 break;
             case up:
                 keys[0] = keyAbove;
@@ -104,18 +103,30 @@ public class CharacterBlockSystem extends SortedIteratingSystem {
 
     private void checkCollision(Entity entity, int [] keys){
         for (int key: keys) {
-            Entity collidedEntity = positionTracker.getEntity(key);
-            if(collidedEntity!=null&&collidedEntity!=entity){
-                log.debug("Collided w chara "+collidedEntity);
-//                if (checkCollisionBetween(entity,collidedEntity)){
-                    blockEntity(entity);
-//                }
+            List<Entity> collidedEntities = positionTracker.getEntity(key);
+            if(collidedEntities!=null) {
+                for (Entity collidedEntity : collidedEntities) {
+                    if (collidedEntity != null && collidedEntity != entity) {
+                        log.debug("Collided w chara " + collidedEntity);
+                                        if (checkCollisionBetween(entity,collidedEntity)){
+                        blockEntity(entity);
+                                            log.debug("BLock occured");
+                                        }
+                    }
+                }
             }
 
         }
     }
     private boolean checkCollisionBetween(Entity e1, Entity e2){
-       return Intersector.overlaps(Mappers.POSITION.get(e1).getBounds(),Mappers.POSITION.get(e2).getBounds());
+       boolean ret =  overlaps(Mappers.BOUNDS.get(e1).getBounds(),Mappers.BOUNDS.get(e2).getBounds());
+       log.debug("chckcollision returns "+ret);
+       return ret;
+    }
+
+    public static boolean overlaps (Rectangle r1, Rectangle r2) {
+        float threshold = 0.9f;
+        return r1.x < r2.x + threshold*r2.width && r1.x + threshold*r1.width > r2.x && r1.y < r2.y + threshold*r2.height && r1.y + threshold*r1.height > r2.y;
     }
 
     private void blockEntity(Entity entity){
@@ -125,8 +136,8 @@ public class CharacterBlockSystem extends SortedIteratingSystem {
 
     }
 //
-//    private Entity detectCollidedCharacter(Vector2 targetPosition, Direction direction, Position position){
-//        float x = targetPosition.x,y=targetPosition.y, width = position.getWidth(),height=position.getHeight();
+//    private Entity detectCollidedCharacter(Vector2 targetPosition, Direction direction, BoundsComponent bounds){
+//        float x = targetPosition.x,y=targetPosition.y, width = bounds.getWidth(),height=bounds.getHeight();
 //        Entity collidedEntity = null;
 //        switch (direction){
 //            case up:

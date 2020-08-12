@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import exp.zayta.lorale.GameConfig;
 import exp.zayta.lorale.common.Mappers;
+import exp.zayta.lorale.engine.movement.movement_components.BoundsComponent;
 import exp.zayta.lorale.engine.movement.movement_components.MovementComponent;
 import exp.zayta.lorale.engine.movement.movement_components.Position;
 
@@ -18,6 +19,7 @@ import static exp.zayta.lorale.engine.movement.PositionsComparator.positionsComp
 public class MovementSystem extends SortedIteratingSystem {
     private final static Family FAMILY = Family.all(
             MovementComponent.class,
+            BoundsComponent.class,
             Position.class
     ).get();
     public MovementSystem(int priority) {
@@ -41,6 +43,7 @@ public class MovementSystem extends SortedIteratingSystem {
 //            position.lerp(targetPosition, progress);
 
             position.set(targetPosition);
+            Mappers.BOUNDS.get(entity).setBounds(targetPosition.x,targetPosition.y);
 //            //if character pos and target pos are almost the same
 //            if (position.dst(targetPosition) < 0.01f) {
 //                movementComponent.setDirection(Direction.none);

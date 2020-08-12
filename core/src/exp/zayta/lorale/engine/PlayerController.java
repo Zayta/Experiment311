@@ -76,25 +76,25 @@ public class PlayerController {
 //            }
         }
     }
-
-    public void addFollowers(){
-        entities = engine.getEntitiesFor(PLAYABLE_CHARACTERS);
-        for(Entity player:entities){
-            Vector2 position = Mappers.MOVEMENT.get(player).getTargetPosition();
-
-            for(int i = -1; i<=1;i++){
-                for(int j = -1; j<=1; j++){
-                    Entity entity1 = positionTracker.getEntityAtPos(EntityType.CHARACTER,position.x+i,position.y+j);
-                    if(entity1!=null&&!entities.contains(entity1,true)){
-                        entity1.add(engine.createComponent(FollowerTag.class));
-                        //System.out.println("Added follower");
-                    }
-                }
-            }
-
-        }
-
-    }
+//
+//    public void addFollowers(){
+//        entities = engine.getEntitiesFor(PLAYABLE_CHARACTERS);
+//        for(Entity player:entities){
+//            Vector2 position = Mappers.MOVEMENT.get(player).getTargetPosition();
+//
+//            for(int i = -1; i<=1;i++){
+//                for(int j = -1; j<=1; j++){
+//                    Entity entity1 = positionTracker.getEntityAtPos(EntityType.CHARACTER,position.x+i,position.y+j);
+//                    if(entity1!=null&&!entities.contains(entity1,true)){
+//                        entity1.add(engine.createComponent(FollowerTag.class));
+//                        //System.out.println("Added follower");
+//                    }
+//                }
+//            }
+//
+//        }
+//
+//    }
     public void removeFollowers(){
         entities = engine.getEntitiesFor(Family.all(FollowerTag.class).get());
         //remove PlayerTag from those entities
