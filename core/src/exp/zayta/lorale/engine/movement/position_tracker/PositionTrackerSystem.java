@@ -37,7 +37,7 @@ public class PositionTrackerSystem extends SortedIteratingSystem {
 
         positionTracker.updateGlobalTracker(entity, pos.x, pos.y);
 
-        PositionTrackerComponent positionTrackerComponent = Mappers.POSITION_TRACKER.get(entity);
+//        PositionTrackerComponent positionTrackerComponent = Mappers.POSITION_TRACKER.get(entity);
         positionTracker.updateEntityTracker(entity, pos.x, pos.y);
 
     }

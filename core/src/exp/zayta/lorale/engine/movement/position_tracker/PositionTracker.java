@@ -30,8 +30,10 @@ public class PositionTracker{
     }
     public int generateKey(float x, float y)
     {
+
         n =(int)( (mapWidth+1)/GameConfig.ENTITY_WIDTH);
-        int i = (int)(y/GameConfig.ENTITY_HEIGHT),j = (int)(x/GameConfig.ENTITY_WIDTH)/*, n= mapWidth/maxObjWidth*/;
+        int i = (int)(y/GameConfig.ENTITY_HEIGHT),
+                j = (int)(x/GameConfig.ENTITY_WIDTH)/*, n= mapWidth/maxObjWidth*/;
         return i*n+j;
     }
 

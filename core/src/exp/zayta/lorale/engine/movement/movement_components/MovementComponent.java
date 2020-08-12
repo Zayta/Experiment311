@@ -32,7 +32,7 @@ public class MovementComponent implements Component {
     }
 
     public void setTargetPosition(float x, float y) {
-        this.targetPosition.set(Math.round(x),Math.round(y));
+        this.targetPosition.set((x),(y));
     }
 
     public Vector2 getTargetPosition() {

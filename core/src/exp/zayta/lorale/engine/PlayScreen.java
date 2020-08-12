@@ -27,6 +27,7 @@ import exp.zayta.lorale.engine.entities.Characters;
 import exp.zayta.lorale.engine.game_systems.character.CharacterBlockSystem;
 import exp.zayta.lorale.engine.hud.Hud;
 import exp.zayta.lorale.engine.hud.HudSystem;
+import exp.zayta.lorale.engine.input.InputSystem;
 import exp.zayta.lorale.engine.map.MapMaker;
 import exp.zayta.lorale.engine.map.tiled_map.TiledMapCollisionSystem;
 import exp.zayta.lorale.engine.map.tiled_map.TiledMapRenderSystem;
@@ -145,7 +146,7 @@ public class PlayScreen extends ScreenAdapter {
      * Rmb order of entities processed may also matter so sort entities in positional order before processing their movements
      */
     private void addSystems(){
-//        engine.addSystem(new InputSystem(1,hud,playerController));
+        engine.addSystem(new InputSystem(3,hud,playerController));
         engine.addSystem(new PositionsComparatorSystem(2));
         engine.addSystem(new PositionTrackerSystem(10,positionTracker));//updates the tracker
         engine.addSystem(new MovementSystem(70));//moves entity to target position n set movement to none. should be last
@@ -184,25 +185,25 @@ public class PlayScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         GdxUtils.clearScreen();
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-            //log.debug("LEFT KEY PRESSED");
-            playerController.movePlayer(Direction.left);
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
-            //log.debug("RIGHT KEY PRESSED");
-            playerController.movePlayer(Direction.right);
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.UP)){
-            //log.debug("LEFT KEY PRESSED");
-            playerController.movePlayer(Direction.up);
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
-            //log.debug("RIGHT KEY PRESSED");
-            playerController.movePlayer(Direction.down);
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.P)){
-            playerController.debugPlayerPosition();
-        }
+//        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+//            //log.debug("LEFT KEY PRESSED");
+//            playerController.movePlayer(Direction.left);
+//        }
+//        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+//            //log.debug("RIGHT KEY PRESSED");
+//            playerController.movePlayer(Direction.right);
+//        }
+//        if(Gdx.input.isKeyPressed(Input.Keys.UP)){
+//            //log.debug("LEFT KEY PRESSED");
+//            playerController.movePlayer(Direction.up);
+//        }
+//        if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+//            //log.debug("RIGHT KEY PRESSED");
+//            playerController.movePlayer(Direction.down);
+//        }
+//        if(Gdx.input.isKeyPressed(Input.Keys.P)){
+//            playerController.debugPlayerPosition();
+//        }
 //        hud.act(delta); //act the Hud
         engine.update(delta);
 

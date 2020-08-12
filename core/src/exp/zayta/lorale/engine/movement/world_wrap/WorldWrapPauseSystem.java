@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.Logger;
 import exp.zayta.lorale.common.Mappers;
 import exp.zayta.lorale.engine.movement.Direction;
 import exp.zayta.lorale.engine.movement.movement_components.MovementComponent;
+import exp.zayta.lorale.engine.movement.movement_components.Position;
 
 public class WorldWrapPauseSystem extends IteratingSystem {
 
@@ -32,26 +33,31 @@ public class WorldWrapPauseSystem extends IteratingSystem {
                 right = worldWrapComponent.getRight(),bottom = worldWrapComponent.getBottom();
 
         MovementComponent movement = Mappers.MOVEMENT.get(entity);
-        Vector2 position = movement.getTargetPosition();
+        Vector2 targetPos = movement.getTargetPosition();
 
         Direction direction = movement.getDirection();
-        float x = position.x; float y = position.y;
+        float x = targetPos.x; float y = targetPos.y;
+        Position position = Mappers.POSITION.get(entity);
 
         if(direction==Direction.up&&y>=top){
-
-            movement.setTargetPosition(Mappers.POSITION.get(entity).getPosition()); //stop entity from moving
-
+            y = Math.min(top,position.getY());
+            movement.setTargetPosition(x,y); //stop entity from moving
         }
-        else if(direction==Direction.down&&y<bottom){
+        if(direction==Direction.down&&y<=bottom){
 
-            movement.setTargetPosition(Mappers.POSITION.get(entity).getPosition()); //stop entity from moving
-        }
-        else if(direction== Direction.left&&x<left){
-            movement.setTargetPosition(Mappers.POSITION.get(entity).getPosition()); //stop entity from moving
-        }
-        else if(direction==Direction.right&&x>=right){
+            y = Math.max(bottom,position.getY());
 
-            movement.setTargetPosition(Mappers.POSITION.get(entity).getPosition()); //stop entity from moving
+            movement.setTargetPosition(x,y); //stop entity from moving
+        }
+        if(direction== Direction.left&&x<=left){
+            x=Math.max(left,position.getX());
+            y = position.getY();
+            movement.setTargetPosition(x,y); //stop entity from moving
+        }
+        if(direction==Direction.right&&x>=right){
+            x=Math.max(right,position.getX());
+
+            movement.setTargetPosition(x,y); //stop entity from moving
         }
 
     }

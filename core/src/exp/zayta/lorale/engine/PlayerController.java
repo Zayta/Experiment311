@@ -63,6 +63,7 @@ public class PlayerController {
 //            ////System.out.println("Entities direction is "+movement.getDirection());
             if(movement.getDirection()==Direction.none)
                 continue;
+            if(Mappers.POSITION.get(entity).getPosition().equals(movement.getTargetPosition()))
             movement.move(direction);
 //            //todo clean up code
 //            if(Mappers.PLAYER.get(entity)!=null){ //move player

@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Logger;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import exp.zayta.lorale.GameConfig;
@@ -19,6 +20,7 @@ import exp.zayta.lorale.engine.entities.tags.CharacterTag;
 import exp.zayta.lorale.engine.movement.Direction;
 import exp.zayta.lorale.engine.movement.movement_components.MovementComponent;
 import exp.zayta.lorale.engine.movement.movement_components.BoundsComponent;
+import exp.zayta.lorale.engine.movement.movement_components.Position;
 import exp.zayta.lorale.engine.movement.position_tracker.PositionTracker;
 
 import static exp.zayta.lorale.engine.movement.PositionsComparator.positionsComparator;
@@ -33,7 +35,7 @@ public class CharacterBlockSystem extends SortedIteratingSystem {
             MovementComponent.class,
             BoundsComponent.class,
             CharacterTag.class).get();
-    private float increment = Math.max(GameConfig.ENTITY_HEIGHT, GameConfig.ENTITY_WIDTH);
+    private float increment = Math.min(GameConfig.ENTITY_HEIGHT/2, GameConfig.ENTITY_WIDTH/2);
     public CharacterBlockSystem(int priority,PositionTracker positionTracker) {
         super(family,positionsComparator,priority);
 //        this.engine = engine;
@@ -62,8 +64,10 @@ public class CharacterBlockSystem extends SortedIteratingSystem {
 //            int [] keys = new int []{
 //              key,key-1,key+1,keyAbove-1,keyAbove,keyAbove+1,keyBelow-1,keyBelow,keyBelow+1
 //            };
+//        float x = targetPosition.x,y = targetPosition.y, height = bounds.getHeight(),width = bounds.getWidth();
         switch (direction) {
             case none:
+                keys=new int[]{key};
                 break;
             case up:
                 keys[0] = keyAbove;
@@ -71,13 +75,21 @@ public class CharacterBlockSystem extends SortedIteratingSystem {
                 keys[2] = keyAbove - 1;
                 keys[3] = key - 1;
                 keys[4] = key + 1;
+                keys[5] = key;
+//                for(float step = 0; step <= bounds.getWidth(); step += increment){
+//                    checkCollision(entity,positionTracker.generateKey(x+step, y + height));
+//                }
                 break;
             case down:
+//                for(float step = 0; step <= width; step += increment){
+//                    checkCollision(entity,positionTracker.generateKey(x+step,y));
+//                }
                 keys[0] = keyBelow;
                 keys[1] = keyBelow + 1;
                 keys[2] = keyBelow - 1;
                 keys[3] = key - 1;
                 keys[4] = key + 1;
+                keys[5] = key;
                 break;
             case left:
                 keys[0] = keyAbove - 1;
@@ -85,41 +97,59 @@ public class CharacterBlockSystem extends SortedIteratingSystem {
                 keys[2] = keyBelow - 1;
                 keys[3] = keyAbove;
                 keys[4] = keyBelow;
+                keys[5] = key;
+//                for(float step = 0; step <= height; step += increment){
+//                    checkCollision(entity,positionTracker.generateKey(x,y+step));
+//
+//                }
                 break;
             case right:
+//                for(float step = 0; step <= height; step += increment){
+//                    checkCollision(entity,positionTracker.generateKey(x+width,y+step));
+//                }
                 keys[0] = keyAbove + 1;
                 keys[1] = key + 1;
                 keys[2] = keyBelow + 1;
                 keys[3] = keyAbove;
                 keys[4] = keyBelow;
+                keys[5] = key;
                 break;
         }
-        keys[5] = key;
-        checkCollision(entity, keys);
+        List<Integer> keysList = new ArrayList<>();
+        for(int k:keys)
+            keysList.add(k);
+        checkCollision(entity, keysList,direction);
 
 
 
     }
+    private void checkCollision(Entity entity, int key,Direction direction){
 
-    private void checkCollision(Entity entity, int [] keys){
-        for (int key: keys) {
             List<Entity> collidedEntities = positionTracker.getEntity(key);
             if(collidedEntities!=null) {
                 for (Entity collidedEntity : collidedEntities) {
                     if (collidedEntity != null && collidedEntity != entity) {
                         log.debug("Collided w chara " + collidedEntity);
-                                        if (checkCollisionBetween(entity,collidedEntity)){
-                        blockEntity(entity);
-                                            log.debug("BLock occured");
-                                        }
+                        if (checkCollisionBetween(entity,collidedEntity)){
+                            blockEntity(entity);
+                        }
                     }
                 }
             }
 
+
+    }
+
+    private void checkCollision(Entity entity, List<Integer> keys,Direction direction){
+        for (int key: keys) {
+            checkCollision(entity,key,direction);
         }
     }
-    private boolean checkCollisionBetween(Entity e1, Entity e2){
-       boolean ret =  overlaps(Mappers.BOUNDS.get(e1).getBounds(),Mappers.BOUNDS.get(e2).getBounds());
+    private boolean checkCollisionBetween(Entity entity, Entity collidedE){
+        Vector2 targetPos = Mappers.MOVEMENT.get(entity).getTargetPosition();
+        BoundsComponent boundsComponent = Mappers.BOUNDS.get(entity);
+        Rectangle rectangle = new Rectangle(targetPos.x,targetPos.y,boundsComponent.getWidth(),boundsComponent.getHeight());
+       boolean ret =  Intersector.overlaps(rectangle,Mappers.BOUNDS.get(collidedE).getBounds());
        log.debug("chckcollision returns "+ret);
        return ret;
     }
@@ -134,6 +164,32 @@ public class CharacterBlockSystem extends SortedIteratingSystem {
         log.debug("Collision occurred");
         movementComponent.setTargetPosition(Mappers.POSITION.get(entity).getPosition());
 
+    }
+    //experiment where player is forced to the position of the collided character
+    private void forceBlockEntity(Entity entity, Entity collidedEntity,Direction direction){
+
+        Position position = Mappers.POSITION.get(entity);
+
+        Position collidedPosition = Mappers.POSITION.get(collidedEntity);
+        MovementComponent movementComponent = Mappers.MOVEMENT.get(entity);
+        log.debug("Collision occurred");
+        BoundsComponent collidedBounds = Mappers.BOUNDS.get(collidedEntity);
+        switch (direction){
+            case none:
+                break;
+            case up:
+                movementComponent.setTargetPosition(position.getX(),collidedPosition.getY());
+                break;
+            case down:
+
+                movementComponent.setTargetPosition(position.getX(),collidedPosition.getY()+collidedBounds.getHeight());
+                break;
+            case left:
+                break;
+            case right:
+                break;
+        }
+        log.debug("BLock occured");
     }
 //
 //    private Entity detectCollidedCharacter(Vector2 targetPosition, Direction direction, BoundsComponent bounds){

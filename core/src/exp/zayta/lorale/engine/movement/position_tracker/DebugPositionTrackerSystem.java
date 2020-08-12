@@ -78,6 +78,7 @@ public class DebugPositionTrackerSystem extends EntitySystem {
                 "Bounds Raw Key: "+PositionTracker.generateKey(bounds.getX(),bounds.getY())+"\n"+*/
                 "p:" + positionTracker.getKeyForEntity(entity));
         font.draw(batch, layout, boundsComponent.getX(), boundsComponent.getY() + boundsComponent.getHeight() + layout.height+0.1f);//0.1f is offset from bottom
+
     }
 
     @Override
