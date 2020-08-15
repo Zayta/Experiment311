@@ -159,7 +159,7 @@ public class PlayScreen extends ScreenAdapter {
 
         engine.addSystem(new CameraUpdateSystem(10,viewport));
 
-        engine.addSystem(new RenderSystem(120,viewport,batch));
+//        engine.addSystem(new RenderSystem(120,viewport,batch));
 
         engine.addSystem(new HudSystem(1000,hud));
 
@@ -171,7 +171,7 @@ public class PlayScreen extends ScreenAdapter {
         engine.addSystem(new TiledMapCollisionSystem(30,(TiledMapTileLayer) mapMaker.getCollisionLayer()));
 //        engine.addSystem(new MapBlockPauseSystem(31,(TiledMapTileLayer) tiledMap.getLayers().get(1)));
 
-        engine.addSystem(new TiledMapRenderSystem(100,mapMaker.getTiledMap(),viewport));
+        engine.addSystem(new TiledMapRenderSystem(100,mapMaker.getTiledMap(),viewport,engine));
     }
     private void addAnimationSystems(){
         engine.addSystem(new AnimationSystem(15));

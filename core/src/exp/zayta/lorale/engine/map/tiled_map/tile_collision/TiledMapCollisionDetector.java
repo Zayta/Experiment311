@@ -29,6 +29,7 @@ public class TiledMapCollisionDetector {
     private float increment;
     public TiledMapCollisionDetector(TiledMapTileLayer collisionLayer){
         this.collisionLayer = collisionLayer;
+
     }
     
 

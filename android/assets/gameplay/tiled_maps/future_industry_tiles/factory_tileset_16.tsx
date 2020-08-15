@@ -41,6 +41,41 @@
    <object id="1" x="2" y="0" width="12" height="10"/>
   </objectgroup>
  </tile>
+ <tile id="856">
+  <properties>
+   <property name="doorOpen" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="857">
+  <properties>
+   <property name="doorOpen" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="858">
+  <properties>
+   <property name="doorOpen" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="859">
+  <properties>
+   <property name="doorOpen" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="860">
+  <properties>
+   <property name="doorOpen" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="861">
+  <properties>
+   <property name="doorOpen" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="862">
+  <properties>
+   <property name="doorOpen" type="bool" value="true"/>
+  </properties>
+ </tile>
  <tile id="875">
   <objectgroup draworder="index" id="2">
    <object id="1" x="2" y="11" width="12" height="5"/>
@@ -52,6 +87,41 @@
    <object id="2" x="2" y="11" width="12" height="5"/>
   </objectgroup>
  </tile>
+ <tile id="908">
+  <properties>
+   <property name="doorOpen" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="909">
+  <properties>
+   <property name="doorOpen" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="910">
+  <properties>
+   <property name="doorOpen" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="911">
+  <properties>
+   <property name="doorOpen" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="912">
+  <properties>
+   <property name="doorOpen" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="913">
+  <properties>
+   <property name="doorOpen" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="914">
+  <properties>
+   <property name="doorOpen" type="bool" value="true"/>
+  </properties>
+ </tile>
  <tile id="927">
   <objectgroup draworder="index" id="2">
    <object id="1" x="2" y="0" width="12" height="11"/>
@@ -61,6 +131,41 @@
   <objectgroup draworder="index" id="2">
    <object id="1" x="2" y="0" width="12" height="11"/>
   </objectgroup>
+ </tile>
+ <tile id="960">
+  <properties>
+   <property name="doorOpen" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="961">
+  <properties>
+   <property name="doorOpen" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="962">
+  <properties>
+   <property name="doorOpen" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="963">
+  <properties>
+   <property name="doorOpen" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="964">
+  <properties>
+   <property name="doorOpen" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="965">
+  <properties>
+   <property name="doorOpen" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="966">
+  <properties>
+   <property name="doorOpen" type="bool" value="true"/>
+  </properties>
  </tile>
  <tile id="979">
   <objectgroup draworder="index" id="2">
@@ -76,6 +181,41 @@
   <objectgroup draworder="index" id="2">
    <object id="1" x="0" y="11" width="12" height="5"/>
   </objectgroup>
+ </tile>
+ <tile id="1012">
+  <properties>
+   <property name="doorOpen" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="1013">
+  <properties>
+   <property name="doorOpen" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="1014">
+  <properties>
+   <property name="doorOpen" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="1015">
+  <properties>
+   <property name="doorOpen" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="1016">
+  <properties>
+   <property name="doorOpen" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="1017">
+  <properties>
+   <property name="doorOpen" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="1018">
+  <properties>
+   <property name="doorOpen" type="bool" value="true"/>
+  </properties>
  </tile>
  <tile id="1034">
   <objectgroup draworder="index" id="2">

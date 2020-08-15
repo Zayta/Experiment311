@@ -17,7 +17,7 @@ public class AnimationComponent implements Component {
     // Constant rows and columns of the sprite sheet
     private final int FRAME_COLS = 3, FRAME_ROWS = 4;
 //    private Direction animationDirection;
-    private final float frameDuration = GameConfig.MOVING_SPEED*5;
+    private final float frameDuration = GameConfig.MOVING_SPEED*1.5f;
 
     //    private Animation<TextureRegion> currentAnimation; private float currentTime=0;
     private ArrayList<Animation<TextureRegion>> animations;

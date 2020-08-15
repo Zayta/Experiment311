@@ -31,7 +31,6 @@ public class TiledMapCollisionSystem extends IteratingSystem {
         super(family,priority);
         collisionDetector = new TiledMapCollisionDetector(tiledMapCollisionLayer);
     }
-
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         MovementComponent movementComponent = Mappers.MOVEMENT.get(entity);

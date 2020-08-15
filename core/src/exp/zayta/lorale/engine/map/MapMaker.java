@@ -14,13 +14,12 @@ import java.util.Hashtable;
 
 import exp.zayta.lorale.GameConfig;
 import exp.zayta.lorale.assets.AssetDescriptors;
+import exp.zayta.lorale.engine.map.tiled_map.LayerNames;
 
 public class MapMaker {
     private Rectangle mapBounds;
     private static final Logger log = new Logger(MapMaker.class.getName(),Logger.DEBUG);
 
-    public static final String initPositionsLayer = "Positions";
-    public static final String collisionLayer = "Collision";
 
     private AssetManager assetManager;
     private Hashtable<MapName,TiledMap> tiledMaps;
@@ -44,10 +43,10 @@ public class MapMaker {
 
     //layers
     public MapLayer getCollisionLayer(){
-        return tiledMap.getLayers().get(collisionLayer);
+        return tiledMap.getLayers().get(LayerNames.collisionLayer);
     }
     public MapLayer getPositionLayer(){
-        return tiledMap.getLayers().get(initPositionsLayer);
+        return tiledMap.getLayers().get(LayerNames.initPositionsLayer);
     }
     public TiledMap getTiledMap(){
         return tiledMap;
