@@ -38,15 +38,15 @@ public class InputSystem extends EntitySystem {
             //log.debug("LEFT KEY PRESSED");
             playerController.movePlayer(Direction.left);
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+        else if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
             //log.debug("RIGHT KEY PRESSED");
             playerController.movePlayer(Direction.right);
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.UP)){
+        else if(Gdx.input.isKeyPressed(Input.Keys.UP)){
             //log.debug("LEFT KEY PRESSED");
             playerController.movePlayer(Direction.up);
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+        else if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
             //log.debug("RIGHT KEY PRESSED");
             playerController.movePlayer(Direction.down);
         }

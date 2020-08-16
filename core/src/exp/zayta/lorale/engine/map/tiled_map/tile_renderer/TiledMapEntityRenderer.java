@@ -45,7 +45,7 @@ public class TiledMapEntityRenderer extends OrthogonalTiledMapRenderer {
         for (MapLayer layer : map.getLayers()) {
             if (layer.isVisible()) {
                 if (layer instanceof TiledMapTileLayer) {
-                    renderTileLayer((TiledMapTileLayer)layer);
+                    this.renderTileLayer((TiledMapTileLayer)layer);
                     currentLayer++;
                     if(map.getLayers().get(currentLayer).getName().equals(LayerNames.initPositionsLayer)){
                         drawEntities();
@@ -60,6 +60,8 @@ public class TiledMapEntityRenderer extends OrthogonalTiledMapRenderer {
         endRender();
         renderQueue.clear();
     }
+
+
     private void drawEntities(){
         for(Entity entity:renderQueue) {
             BoundsComponent position = Mappers.BOUNDS.get(entity);
